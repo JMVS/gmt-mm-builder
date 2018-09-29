@@ -1,21 +1,30 @@
-# ISO Builder for Genymobile Tools Magisk Module
-This program downloads, extracts, injects and creates the ISO file required for the Magisk Module Genymobile Tools.
+# ISO & Magisk Module Builder for Genymobile Tools
+This program downloads, extracts, injects and creates the ISO file required for the Magisk Module Genymobile Tools. Then, builds and packages Magisk Module Genymobile Tools for install as a Magisk Module.
 Currently only supports Windows platforms.
 
 ## Pre-requisites
-* Have a OnePlus 3T phone.
-* Have an Internet connection on the computer.
-* Have the available space on disk to build ISO (approx. ~50-60 MiB).
+* OnePlus 3T phone.
+* Internet connection on the computer.
+* Available space on disk to build ISO and Magisk Module (approx. ~50-60 MiB).
+* Makisk Manager installed on phone.
+* USB Drivers installed on the computer.
+* ADB Debugging enabled on phone.
+* Computer authorized to make use of USB ADB Debugging.
 
 ## How to use it
-1. [Download program](https://github.com/JMVS/gmt-mm-builder/archive/master.zip "ISO Builder for Genymobile Tools Magisk Module").
+1. [Download program](https://github.com/JMVS/gmt-mm-builder/archive/master.zip "ISO & Magisk Module Builder for Genymobile Tools").
 2. Extract archive to a **writable** folder.
 3. Run **"buildgmtiso.cmd"** and wait it to finish.
-4. If everything went OK, you should see a **"usb_drivers.iso"** file.
+4. If everything went OK, you should see a **"gmt-mm.zip"** file.
+5. Copy **"gmt-mm.zip"** to your phone.
+6. Install as a Magisk Module.
 
 ### Additional options
 * You can place original usb_drivers.iso file from your phone inside folder original_iso to skip extracting it from your phone.
 * If you choose to extract usb_drivers.iso file from your phone, you should already have USB drivers installed, ADB debugging on and computer authorized, otherwise pulling file will fail.
+
+### Caveats
+* Once properly installed as a Magisk Module, when connected to a computer, you should select Transfer Files option for Windows to show the ISO as a drive.
 
 ## Troubleshooting
 Error codes displayed by buildgmtiso.cmd:
