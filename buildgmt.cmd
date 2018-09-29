@@ -133,12 +133,15 @@ tools\mkisofs.exe -udf -r -duplicates-once -quiet -o mm/system/etc/%oISO%.iso ma
 IF NOT EXIST %oISO%.iso GOTO Error
 ECHO.
 ECHO * Building Magisk Module...
-tools\7z.exe a -mx9 gmt-mm.zip mm\*
+DEL mm\system\etc\placeholder >NUL
+ECHO -- Creating module...
+tools\7z.exe a -mx9 -bso0 gmt-mm.zip mm\*
 IF %ERRORLEVEL% NEQ 0 (
     SET errcode = 12
 	GOTO Error
 )
 :CleanUp
+ECHO.
 ECHO * Cleaning up...
 ECHO -- Erasing files...
 FOR /F "TOKENS=*" %%A IN ('DIR /A-D /B "main" ^| FINDSTR /I /V "autorun.inf"') DO DEL /Q /F "main\%%~A"
