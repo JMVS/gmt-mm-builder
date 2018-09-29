@@ -7,9 +7,9 @@ REM gnirehtet
 SET RTver=2.3
 REM Original ISO name (without .iso extension)
 SET oISO=usb_drivers
-ECHO **********************************************
-ECHO ISO Builder for Genymobile Tools Magisk Module
-ECHO **********************************************
+ECHO ************************************************
+ECHO ISO ^& Magisk Module Builder for Genymobile Tools 
+ECHO ************************************************
 ECHO.
 REM ## DEFINE VARIABLES
 SET errcode=0
@@ -129,9 +129,15 @@ ECHO -- Adding files...
 COPY tools\7z.* %oDIR% >NUL
 ECHO -- Creating ISO...
 SET errcode = 12
-tools\mkisofs.exe -udf -r -duplicates-once -quiet -o %oISO%.iso main/
+tools\mkisofs.exe -udf -r -duplicates-once -quiet -o mm/system/etc/%oISO%.iso main/
 IF NOT EXIST %oISO%.iso GOTO Error
 ECHO.
+ECHO * Building Magisk Module...
+tools\7z.exe a -mx9 gmt-mm.zip mm\*
+IF %ERRORLEVEL% NEQ 0 (
+    SET errcode = 12
+	GOTO Error
+)
 :CleanUp
 ECHO * Cleaning up...
 ECHO -- Erasing files...
@@ -144,7 +150,7 @@ ECHO All done.
 ECHO.
 :Salir
 TIMEOUT /T 10
-EXIT /B
+EXIT /B %errcode%
 
 :Error
 ECHO error %errcode%.
