@@ -8,7 +8,7 @@ Currently only supports Windows platforms.
 * Have the available space on disk to build ISO (approx. ~50-60 MiB).
 
 ## How to use it
-1. [Download program](https://github.com/JMVS/usb_drivers_gmt/archive/master.zip "ISO Builder for Genymobile Tools Magisk Module").
+1. [Download program](https://github.com/JMVS/gmt-mm-builder/archive/master.zip "ISO Builder for Genymobile Tools Magisk Module").
 2. Extract archive to a **writable** folder.
 3. Run **"buildgmtiso.cmd"** and wait it to finish.
 4. If everything went OK, you should see a **"usb_drivers.iso"** file.
@@ -19,17 +19,15 @@ Currently only supports Windows platforms.
 
 ## Troubleshooting
 Error codes displayed by buildgmtiso.cmd:
-| Error | Description                                         | Actions                                                                                                              |
-|:-----:|:---------------------------------------------------:|:-------------------------------------------------------------------------------------------------------------------- |
-| 1     | Error downloading scrcpy x32 version from server    | Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)|
-| 2     | Error downloading scrcpy x64 version from server    | Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)|
-| 3     | Error downloading gnirehtet x64 version from server | Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)|
-| 4     | Error downloading ADB from server                   | Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)|
-| 5     | Error updating scrcpy x32 version archive           | Check folder is writable / Check available space / Folder/files might already exists (delete manually)               |
-| 6     | Error updating scrcpy x64 version archive           | Check folder is writable / Check available space / Folder/files might already exists (delete manually)               |
-| 7     | Error updating gnirehtet x64 version archive        | Check folder is writable / Check available space / Folder/files might already exists (delete manually)               |
-| 8     | Error updating ADB archive                          | Check folder is writable / Check available space / Folder/files might already exists (delete manually)               |
-| 9     | Invalid option selected                             | Select a valid option                                                                                                |
-| 10    | Error extracting ADB files                          | Check folder is writable / Check available space / Folder/files might already exists/running (delete manually)       |
-| 11    | Error extracting original ISO files                 | Check folder is writable / Check available space / Check provided ISO is valid                                       |
-| 12    | Error building modified ISO                         | Check folder is writable / Check available space                                                                     |
+1. Error downloading scrcpy x32 version from server: Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)
+2. Error downloading scrcpy x64 version from server: Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)
+3. Error downloading gnirehtet x64 version from server:Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)
+4. Error downloading ADB from server: Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)
+5. Error updating scrcpy x32 version archive: Check folder is writable / Check available space / Folder/files might already exists (delete manually)
+6. Error updating scrcpy x64 version archive: Check folder is writable / Check available space / Folder/files might already exists (delete manually)
+7. Error updating gnirehtet x64 version archive: Check folder is writable / Check available space / Folder/files might already exists (delete manually)
+8. Error updating ADB archive: Check folder is writable / Check available space / Folder/files might already exists (delete manually)
+9. Invalid option selected: Select a valid option
+10. Error extracting ADB files: Check folder is writable / Check available space / Folder/files might already exists/running (delete manually)
+11. Error extracting original ISO files: Check folder is writable / Check available space / Check provided ISO is valid
+12. Error building modified ISO: Check folder is writable / Check available space
