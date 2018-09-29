@@ -14,7 +14,7 @@ Currently only supports Windows platforms.
 ## How to use it
 1. [Download program](https://github.com/JMVS/gmt-mm-builder/archive/master.zip "ISO & Magisk Module Builder for Genymobile Tools").
 2. Extract archive to a **writable** folder.
-3. Run **"buildgmtiso.cmd"** and wait it to finish.
+3. Run **"buildgmt.cmd"** and wait it to finish.
 4. If everything went OK, you should see a **"gmt-mm.zip"** file.
 5. Copy **"gmt-mm.zip"** to your phone.
 6. Install as a Magisk Module.
