@@ -1,18 +1,25 @@
-# ISO & Magisk Module Builder for Genymobile Tools
-This program downloads, extracts, injects and creates the ISO file required for the Magisk Module Genymobile Tools. Then, builds and packages Magisk Module Genymobile Tools for install as a Magisk Module.
+# ISO & Magisk Module Builder for Genymobile&reg; Tools
+This program downloads, extracts, injects and creates the ISO file required for the Magisk Module GMT/OP3T. Then, builds and packages Magisk ModuleGMT/OP3T for install as a Magisk Module.
 Currently only supports Windows platforms.
 
 ## Pre-requisites
 * OnePlus 3T phone.
-* Internet connection on the computer.
-* Available space on disk to build ISO and Magisk Module (approx. ~50-60 MiB).
 * Makisk Manager installed on phone.
 * USB Drivers installed on the computer.
 * ADB Debugging enabled on phone.
 * Computer authorized to make use of USB ADB Debugging.
 
-## How to use it
-1. [Download program](https://github.com/JMVS/gmt-mm-builder/archive/master.zip "ISO & Magisk Module Builder for Genymobile Tools").
+## Download
+
+Download the [latest release][latest] and install via Magisk Manager.
+
+[latest]: https://github.com/JMVS/gmt-mm-builder/releases/latest
+
+### Caveats
+* Once properly installed as a Magisk Module, when connected to a computer, you should select Transfer Files option for Windows to show the ISO as a drive. This is the same behavior as the original ISO shipped with the phone.
+
+## Build
+1. [Download/clone repo](https://github.com/JMVS/gmt-mm-builder/archive/master.zip).
 2. Extract archive to a **writable** folder.
 3. Run **"buildgmt.cmd"** and wait it to finish.
 4. If everything went OK, you should see a **"gmt-mm.zip"** file.
@@ -23,10 +30,12 @@ Currently only supports Windows platforms.
 * You can place original usb_drivers.iso file from your phone inside folder original_iso to skip extracting it from your phone.
 * If you choose to extract usb_drivers.iso file from your phone, you should already have USB drivers installed, ADB debugging on and computer authorized, otherwise pulling file will fail.
 
-### Caveats
-* Once properly installed as a Magisk Module, when connected to a computer, you should select Transfer Files option for Windows to show the ISO as a drive.
+### Pre-requisites
+* Windows OS
+* Internet connection on the computer.
+* Available space on disk to build ISO and Magisk Module (approx. ~50-60 MiB).
 
-## Troubleshooting
+### Troubleshooting
 Error codes displayed by buildgmtiso.cmd:
 1. Error downloading scrcpy x32 version from server: Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)
 2. Error downloading scrcpy x64 version from server: Check Internet connection / Check folder is writable / Check available space / Server might be down (try again later)
@@ -45,3 +54,19 @@ Error codes displayed by buildgmtiso.cmd:
 [scrcpy](https://github.com/Genymobile/scrcpy "scrcpy GitHub repo") by Romain Vimont Copyright (C) 2018 Genymobile
 [gnirehtet](https://github.com/Genymobile/gnirehtet "gnirehtet GitHub repo") by Romain Vimont Copyright (C) 2018 Genymobile
 adb by Google
+
+## Licence
+
+    Copyright (C) 2018 José Vera
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
