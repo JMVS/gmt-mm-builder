@@ -116,13 +116,14 @@ GOTO FindISO
 :ExtractISO
 ECHO.
 ECHO -- Extracting original ISO contents...
-ECHO autorun.inf >tmp.lst
-tools\7z.exe x -aoa -bso0 -omain original_iso\%oISO%.iso -xr@tmp.lst
+tools\7z.exe x -aoa -bso0 -omain original_iso\%oISO%.iso
 IF %ERRORLEVEL% NEQ 0 (
     SET errcode = 11
 	GOTO Error
 )
-DEL tmp.lst 2>NUL
+ECHO -- Cleaning structure...
+DEL main/autorun.inf 2>NUL
+REN main/autorun.mod main/autorun.inf
 ECHO.
 ECHO * Building structure...
 ECHO -- Adding files...
