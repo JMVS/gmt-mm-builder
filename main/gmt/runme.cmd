@@ -65,7 +65,7 @@ IF %ERRORLEVEL% GEQ 2 GOTO Error
 ECHO OK.
 <NUL SET /p dummy=- Checking extracted files...
 SET errcode=9
-FOR %%a IN (adb.exe AdbWinApi.dll AdbWinUsbApi.dll avcodec-58.dll avformat-58.dll avutil-56.dll scrcpy-noconsole.exerver.jar scrcpye scrcpy-s.exe SDL2.dll swresample-3.dll) DO (IF NOT EXIST %desDir%\%%a GOTO Error)
+FOR %%a IN (adb.exe AdbWinApi.dll AdbWinUsbApi.dll avcodec-58.dll avformat-58.dll avutil-56.dll scrcpy-noconsole.exe scrcpy-server.jar scrcpy.exe SDL2.dll swresample-3.dll) DO (IF NOT EXIST %desDir%\%%a GOTO Error)
 ECHO OK.
 
 :Exec
