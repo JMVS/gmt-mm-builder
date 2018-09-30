@@ -74,10 +74,8 @@ ECHO Executing...
 <NUL SET /p dummy=- Running scrcpy (no console), please wait...
 REM SET errcode=11
 start /D %desDir% scrcpy-noconsole.exe
-rem CD %desDir%
-rem start scrcpy-noconsole.exe
-rem CD %basDir%
 :Exit
+TIMEOUT /T 10
 EXIT /B %errorcode%
 
 :Error
