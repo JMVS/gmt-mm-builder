@@ -39,10 +39,10 @@ ECHO OK (x%OS%).
 <NUL SET /p dummy=- Checking version...
 SET errcode=5
 IF NOT EXIST %build% GOTO nexDir
-SET /p curGMTVer=<%build%
+SET /P curGMTVer=<%build%
 IF %curGMTVer% GEQ %GMTVer% GOTO extDir
 <NUL SET /p dummy=updating...
-DEL %build%
+DEL %build% 2>NUL
 :nexDir
 ECHO OK.
 <NUL SET /p dummy=- Checking destination...
@@ -65,7 +65,7 @@ IF %ERRORLEVEL% GEQ 2 GOTO Error
 ECHO OK.
 <NUL SET /p dummy=- Checking extracted files...
 SET errcode=9
-FOR %%a IN (adb.exe AdbWinApi.dll AdbWinUsbApi.dll avcodec-58.dll avformat-58.dll avutil-56.dll scrcpy-noconsole.exe scrcpy-server.jar scrcpy.exe SDL2.dll swresample-3.dll) DO (IF NOT EXIST %desDir%\%%a GOTO Error)
+FOR %%a IN (adb.exe AdbWinApi.dll AdbWinUsbApi.dll avcodec-58.dll avformat-58.dll avutil-56.dll scrcpy-noconsole.exerver.jar scrcpye scrcpy-s.exe SDL2.dll swresample-3.dll) DO (IF NOT EXIST %desDir%\%%a GOTO Error)
 ECHO OK.
 
 :Exec
