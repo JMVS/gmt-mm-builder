@@ -150,6 +150,7 @@ FOR /F "TOKENS=*" %%A IN ('DIR /A-D /B "main" ^| FINDSTR /I /V "autorun.inf"') D
 FOR /F "TOKENS=*" %%A IN ('DIR /A-D /B "%oDIR%" ^| FINDSTR /I /V "runme.cmd"') DO DEL /Q /F "%oDIR%\%%~A"
 DEL /F /S /Q adbtmp 2>NUL
 RD adbtmp 2>NUL
+REN main/autorun.inf main/autorun.mod >NUL
 ECHO.
 ECHO All done.
 ECHO.
