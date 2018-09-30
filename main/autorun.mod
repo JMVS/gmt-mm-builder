@@ -1,4 +1,4 @@
 [autorun]
-OPEN=scrcpy\runme.cmd
+OPEN=gmt\runme.cmd
 ICON=OnePlus_USB_Drivers_Setup.exe
-LABEL=Genymobile Tools & Drivers OnePlus
+LABEL=One Plus USB Drivers
