@@ -122,16 +122,16 @@ IF %ERRORLEVEL% NEQ 0 (
 	GOTO Error
 )
 ECHO -- Cleaning structure...
-DEL main/autorun.inf 2>NUL
-REN main/autorun.mod main/autorun.inf
+DEL main\autorun.inf 2>NUL
+REN main\autorun.mod autorun.inf
 ECHO.
 ECHO * Building structure...
 ECHO -- Adding files...
 COPY tools\7z.* %oDIR% >NUL
 ECHO -- Creating ISO...
 SET errcode = 12
-tools\mkisofs.exe -udf -r -duplicates-once -quiet -o mm/system/etc/%oISO%.iso main/
-IF NOT EXIST mm/system/etc/%oISO%.iso GOTO Error
+tools\mkisofs.exe -udf -r -duplicates-once -quiet -o mm\system\etc\%oISO%.iso main/
+IF NOT EXIST mm\system\etc\%oISO%.iso GOTO Error
 ECHO.
 ECHO * Building Magisk Module...
 DEL mm\system\etc\placeholder 2>NUL
@@ -146,11 +146,11 @@ IF %ERRORLEVEL% NEQ 0 (
 ECHO.
 ECHO * Cleaning up...
 ECHO -- Erasing files...
-FOR /F "TOKENS=*" %%A IN ('DIR /A-D /B "main" ^| FINDSTR /I /V "autorun.inf"') DO DEL /Q /F "main\%%~A"
+REN main\autorun.inf autorun.mod >NUL
+FOR /F "TOKENS=*" %%A IN ('DIR /A-D /B "main" ^| FINDSTR /I /V "autorun.mod"') DO DEL /Q /F "main\%%~A"
 FOR /F "TOKENS=*" %%A IN ('DIR /A-D /B "%oDIR%" ^| FINDSTR /I /V "runme.cmd"') DO DEL /Q /F "%oDIR%\%%~A"
 DEL /F /S /Q adbtmp 2>NUL
 RD adbtmp 2>NUL
-REN main/autorun.inf main/autorun.mod >NUL
 ECHO.
 ECHO All done.
 ECHO.
