@@ -1,5 +1,5 @@
 @ECHO OFF
-SET GMTVer=0.1
+SET GMTVer=0.1.0
 SET errcode=1
 SETLOCAL enableextensions disabledelayedexpansion
 REM BATCH author: J_M_V_S at xda-developers.com
