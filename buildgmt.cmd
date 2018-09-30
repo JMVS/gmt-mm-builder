@@ -117,12 +117,12 @@ GOTO FindISO
 ECHO.
 ECHO -- Extracting original ISO contents...
 ECHO autorun.inf >tmp.lst
-tools\7z.exe x -aoa -bso0 -omain original_iso\%oISO%.iso -ir@tmp.lst
+tools\7z.exe x -aoa -bso0 -omain original_iso\%oISO%.iso -xr@tmp.lst
 IF %ERRORLEVEL% NEQ 0 (
     SET errcode = 11
 	GOTO Error
 )
-DEL tmp.lst
+DEL tmp.lst 2>NUL
 ECHO.
 ECHO * Building structure...
 ECHO -- Adding files...
@@ -130,14 +130,15 @@ COPY tools\7z.* %oDIR% >NUL
 ECHO -- Creating ISO...
 SET errcode = 12
 tools\mkisofs.exe -udf -r -duplicates-once -quiet -o mm/system/etc/%oISO%.iso main/
-IF NOT EXIST %oISO%.iso GOTO Error
+IF NOT EXIST mm/system/etc/%oISO%.iso GOTO Error
 ECHO.
 ECHO * Building Magisk Module...
-DEL mm\system\etc\placeholder >NUL
+DEL mm\system\etc\placeholder 2>NUL
+DEL gmt-mm.zip 2>NUL
 ECHO -- Creating module...
-tools\7z.exe a -mx9 -bso0 gmt-mm.zip mm\*
+tools\7z.exe a -mx9 -bso0 gmt-mm.zip .\mm\*
 IF %ERRORLEVEL% NEQ 0 (
-    SET errcode = 12
+    SET errcode = 13
 	GOTO Error
 )
 :CleanUp
@@ -146,8 +147,8 @@ ECHO * Cleaning up...
 ECHO -- Erasing files...
 FOR /F "TOKENS=*" %%A IN ('DIR /A-D /B "main" ^| FINDSTR /I /V "autorun.inf"') DO DEL /Q /F "main\%%~A"
 FOR /F "TOKENS=*" %%A IN ('DIR /A-D /B "%oDIR%" ^| FINDSTR /I /V "runme.cmd"') DO DEL /Q /F "%oDIR%\%%~A"
-DEL /F /S /Q adbtmp >NUL
-RD adbtmp >NUL
+DEL /F /S /Q adbtmp 2>NUL
+RD adbtmp 2>NUL
 ECHO.
 ECHO All done.
 ECHO.
@@ -158,4 +159,5 @@ EXIT /B %errcode%
 :Error
 ECHO error %errcode%.
 ECHO Process aborted.
+ECHO.
 GOTO Salir
