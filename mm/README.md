@@ -1,6 +1,6 @@
 # GMT Magisk Module for OnePlus 3T
 
-Provides a convinient way of having the Genymobile&reg; Tools (scrcpy & gnirehtet) ready to use on your phone. It does that by adding to the original ISO with USB drives the required files to run the tools.
+Provides a convinient way of having the Genymobile&reg; Tools ([scrcpy]: https://github.com/Genymobile/scrcpy & [gnirehtet]: https://github.com/Genymobile/gnirehtet) ready to use on your phone. It does that by adding them to the original ISO with USB drives the required files to run the tools.
 
 ## About scrcpy & gnirehtet
 
