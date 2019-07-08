@@ -2,7 +2,7 @@
 SETLOCAL enableextensions disabledelayedexpansion
 REM ## SET VERSION TO DOWNLOAD
 REM scrcpy
-SET SCver=1.5
+SET SCver=1.9
 REM gnirehtet
 SET RTver=2.3
 REM Original ISO name (without .iso extension)
