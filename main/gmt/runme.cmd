@@ -81,7 +81,7 @@ EXIT /B %errorcode%
 :Error
 ECHO error.
 ECHO.
-ECHO Program exists with error number: %errcode%.
+ECHO Program exits with error number: %errcode%.
 ECHO.
 PAUSE
 GOTO Exit
