@@ -49,6 +49,8 @@ Error codes displayed by buildgmtiso.cmd:
 10. Error extracting ADB files: Check folder is writable / Check available space / Folder/files might already exists/running (delete manually)
 11. Error extracting original ISO files: Check folder is writable / Check available space / Check provided ISO is valid
 12. Error building modified ISO: Check folder is writable / Check available space
+13. Could not create Magisk module (gmt-mm.zip): Check folder is writable / Check available space
+14. Error downloading JSON files from GitHub: API rate limit exceeded (too many requests) / Check folder is writable / Check available space
 
 ## Credits
 [scrcpy](https://github.com/Genymobile/scrcpy "scrcpy GitHub repo") by Romain Vimont Copyright (C) 2018 Genymobile
