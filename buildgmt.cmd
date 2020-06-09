@@ -1,10 +1,10 @@
 @ECHO OFF
 SETLOCAL enableextensions disabledelayedexpansion
-REM ## SET VERSION TO DOWNLOAD
+REM ## SET VERSION TO DOWNLOAD IN CASE AUTO DETECTION FAILURE
 REM scrcpy
-SET SCver=1.10
+SET SCver=1.14
 REM gnirehtet
-SET RTver=2.3
+SET RTver=2.4
 REM Original ISO name (without .iso extension)
 SET oISO=usb_drivers
 ECHO ************************************************
@@ -13,16 +13,34 @@ ECHO ************************************************
 ECHO.
 REM ## DEFINE VARIABLES
 SET errcode=0
-SET GM=https://github.com/Genymobile/
+REM # URL construct
+SET HTTP=https://
+SET GH=github.com
+SET GM=Genymobile
 SET SC=scrcpy
 SET RT=gnirehtet
-SET GHR=/releases/download/
-SET SC32=%GM%%SC%%GHR%v%SCver%/%SC%-win32-v%SCver%.zip
-SET SC64=%GM%%SC%%GHR%v%SCver%/%SC%-win64-v%SCver%.zip
-SET RT64=%GM%%RT%%GHR%v%RTver%/%RT%-rust-win64-v%RTver%.zip
+SET GLR=releases/latest
+REM Fallback in case of processing latest releases fail
+SET SC32=%HTTP%%GH%/%GM%/%SC%/releases/download/v%SCver%/%SC%-win32-v%SCver%.zip
+SET SC64=%HTTP%%GH%/%GM%/%SC%/releases/download/v%SCver%/%SC%-win64-v%SCver%.zip
+SET RT64=%HTTP%%GH%/%GM%/%RT%/releases/download/v%SCver%/%RT%-rust-win64-v%RTver%.zip
+SET LGM=%HTTP%api.%GH%/repos/%GM%/app/%GLR%
+REM # wget arguments
 SET WGGH=--no-check-certificate --content-disposition
 SET WG=-q --show-progress
+REM # Batch variables
 SET oDIR=main\gmt\
+
+ECHO * Getting latest releases...
+<NUL set /p= -- %SC% x32: 
+CALL :LatestRelease %LGM%, %SC%, 1
+IF NOT "%APPVer%"=="" (SET SC32=%HTTP%%GH%/%GM%/%SC%/%GLR%/download/%APPVer% & ECHO %APPVer%) ELSE (ECHO error 14, using v%SCver%...)
+<NUL set /p= -- %SC% x64: 
+CALL :LatestRelease %LGM%, %SC%, 2
+IF NOT "%APPVer%"=="" (SET SC64=%HTTP%%GH%/%GM%/%SC%/%GLR%/download/%APPVer% & ECHO %APPVer%) ELSE (ECHO error 14, using v%SCver%...)
+<NUL set /p= -- %RT% x64: 
+CALL :LatestRelease %LGM%, %RT%, 3
+IF NOT "%APPVer%"=="" (SET RT64=%HTTP%%GH%/%GM%/%RT%/%GLR%/download/%APPVer% & ECHO %APPVer%) ELSE (ECHO error 14, using v%RTver%...)
 ECHO * Downloading...
 ECHO -- %SC% x32...
 tools\wget.exe %WGGH% -O%oDIR%%SC%w32.zip %SC32% %WG%
@@ -93,7 +111,7 @@ ECHO    we can try to extract the ISO directly from your phone.
 ECHO    Make sure the device is connected to this computer before continuing.
 ECHO    NOTE: No modification will be done to any partition.
 :AskExtISO
-SET /P ADBISO=Press (C) to Cancel, (E) to Extract from phone or (R) to try again [C,E,R): 
+SET /P ADBISO=Press (C) to Cancel, (E) to Extract from phone or (R) to try again [C,E,R]: 
 IF /I "%ADBISO:~,1%" EQU "C" GOTO CleanUp
 IF /I "%ADBISO:~,1%" EQU "R" GOTO FindISO
 IF /I "%ADBISO:~,1%" EQU "E" GOTO ExtISO
@@ -154,12 +172,27 @@ RD adbtmp 2>NUL
 ECHO.
 ECHO All done.
 ECHO.
-:Salir
+:EndScript
 TIMEOUT /T 10
 EXIT /B %errcode%
+ENDLOCAL
 
 :Error
 ECHO error %errcode%.
 ECHO Process aborted.
 ECHO.
-GOTO Salir
+GOTO EndScript
+
+:LatestRelease
+SETLOCAL
+SET LGM="%~1"
+CALL SET LGM=%%LGM:app^=%~2%%%
+tools\wget.exe %LGM% -Olatest.json -q
+tools\jq.exe -r ".assets [%~3].name" latest.json >app.ver
+ENDLOCAL
+SET /p AVC= < app.ver
+IF NOT x%AVC:%~2%=%==x%AVC% (SET APPVer=%AVC%) ELSE (SET "APPVer=")
+DEL app.ver >NUL
+DEL latest.json >NUL
+SET "APPVerCheck="
+EXIT /B 0
