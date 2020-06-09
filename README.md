@@ -53,13 +53,13 @@ Error codes displayed by buildgmtiso.cmd:
 14. Error downloading JSON files from GitHub: API rate limit exceeded (too many requests) / Check folder is writable / Check available space
 
 ## Credits
-[scrcpy](https://github.com/Genymobile/scrcpy "scrcpy GitHub repo") by Romain Vimont Copyright (C) 2018 Genymobile
-[gnirehtet](https://github.com/Genymobile/gnirehtet "gnirehtet GitHub repo") by Romain Vimont Copyright (C) 2018 Genymobile
+[scrcpy](https://github.com/Genymobile/scrcpy "scrcpy GitHub repo") by Romain Vimont Copyright (C) 2020 Genymobile
+[gnirehtet](https://github.com/Genymobile/gnirehtet "gnirehtet GitHub repo") by Romain Vimont Copyright (C) 2020 Genymobile
 adb by Google
 
 ## Licence
 
-    Copyright (C) 2018 José Vera
+    Copyright (C) 2020 José Vera
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
