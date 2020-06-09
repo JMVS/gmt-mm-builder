@@ -13,18 +13,20 @@ ECHO ************************************************
 ECHO.
 REM ## DEFINE VARIABLES
 SET errcode=0
-REM # URL construct
-SET HTTP=https://
+REM # URL constructor
+SET HTTPRequest=https://github.com/Genymobile/app/releases
 SET GH=github.com
 SET GM=Genymobile
 SET SC=scrcpy
 SET RT=gnirehtet
-SET GLR=releases/latest
-REM Fallback in case of processing latest releases fail
-SET SC32=%HTTP%%GH%/%GM%/%SC%/releases/download/v%SCver%/%SC%-win32-v%SCver%.zip
-SET SC64=%HTTP%%GH%/%GM%/%SC%/releases/download/v%SCver%/%SC%-win64-v%SCver%.zip
-SET RT64=%HTTP%%GH%/%GM%/%RT%/releases/download/v%SCver%/%RT%-rust-win64-v%RTver%.zip
-SET LGM=%HTTP%api.%GH%/repos/%GM%/app/%GLR%
+CALL SET LGM=%%HTTPRequest:%GH%^=api.%GH%/repos%%
+SET LGM=%LGM%/latest
+CALL SET SC32=%%HTTPRequest:%GM%^=%GM%%/SC%%%
+CALL SET SC32=%%SC32:app^=%SC%%%
+SET SC32=%SC32%/download/v%SCver%/%SC%-win32-v%SCver%.zip
+CALL SET SC64=%%SC32:32^=64%%
+SET RT64=%SC32:~0,55%v%RTver%/%RT%-rust-win64-v%RTver%.zip
+CALL SET RT64=%%RT64:%SC%^=%RT%%%
 REM # wget arguments
 SET WGGH=--no-check-certificate --content-disposition
 SET WG=-q --show-progress
@@ -34,13 +36,17 @@ SET oDIR=main\gmt\
 ECHO * Getting latest releases...
 <NUL set /p= -- %SC% x32: 
 CALL :LatestRelease %LGM%, %SC%, 1
-IF NOT "%APPVer%"=="" (SET SC32=%HTTP%%GH%/%GM%/%SC%/%GLR%/download/%APPVer% & ECHO %APPVer%) ELSE (ECHO error 14, using v%SCver%...)
+ECHO %APPVer%
+IF NOT "%APPVer%"=="" (CALL SET SC32=%%HTTPRequest:app/releases^=%SC%/releases/latest/download/%APPVer%%%) ELSE (ECHO error 14, using v%SCver%...)
 <NUL set /p= -- %SC% x64: 
 CALL :LatestRelease %LGM%, %SC%, 2
-IF NOT "%APPVer%"=="" (SET SC64=%HTTP%%GH%/%GM%/%SC%/%GLR%/download/%APPVer% & ECHO %APPVer%) ELSE (ECHO error 14, using v%SCver%...)
+ECHO %APPVer%
+IF NOT "%APPVer%"=="" (CALL SET SC64=%%SC32:32^=64%%) ELSE (ECHO error 14, using v%SCver%...)
 <NUL set /p= -- %RT% x64: 
 CALL :LatestRelease %LGM%, %RT%, 3
-IF NOT "%APPVer%"=="" (SET RT64=%HTTP%%GH%/%GM%/%RT%/%GLR%/download/%APPVer% & ECHO %APPVer%) ELSE (ECHO error 14, using v%RTver%...)
+ECHO %APPVer%
+IF NOT "%APPVer%"=="" (CALL SET RT64=%%HTTPRequest:app/releases^=%RT%/releases/latest/download/%APPVer%%%) ELSE (ECHO error 14, using v%RTver%...)
+
 ECHO * Downloading...
 ECHO -- %SC% x32...
 tools\wget.exe %WGGH% -O%oDIR%%SC%w32.zip %SC32% %WG%
@@ -63,6 +69,7 @@ IF NOT EXIST %oDIR%%RT%w64.zip (
 	GOTO Error
 )
 ECHO.
+
 ECHO -- Android Debug Bridge (ADB)...
 tools\wget.exe -O%oDIR%adb.zip https://dl.google.com/android/repository/platform-tools-latest-windows.zip %WG%
 IF NOT EXIST %oDIR%adb.zip (
@@ -70,6 +77,7 @@ IF NOT EXIST %oDIR%adb.zip (
 	GOTO Error
 )
 ECHO.
+
 ECHO * Updating archives...
 ECHO -- %SC% x32...
 tools\7z.exe d -bso0 %oDIR%%SC%w32.zip -ir@tools\adbfiles.lst
@@ -96,6 +104,7 @@ IF %ERRORLEVEL% NEQ 0 (
 	GOTO Error
 )
 ECHO.
+
 ECHO * Extracting files...
 :FindISO
 IF NOT EXIST original_iso\%oISO%.iso GOTO ISONFound
@@ -146,7 +155,7 @@ ECHO.
 ECHO * Building structure...
 ECHO -- Adding files...
 COPY tools\7z.* %oDIR% >NUL
-ECHO -- Creating ISO...
+ECHO -- Creating ISO...(safe to ignore "Warning: creating filesystem that does not conform to ISO-9660.")
 SET errcode = 12
 tools\mkisofs.exe -iso-level 2 -J -l -D -N -joliet-long -relaxed-filenames -r -V "OnePlus" -duplicates-once -quiet -o mm\system\etc\%oISO%.iso main/
 IF NOT EXIST mm\system\etc\%oISO%.iso GOTO Error
