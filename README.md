@@ -1,10 +1,10 @@
 # ISO & Magisk Module Builder for Genymobile&reg; Tools
-This program downloads, extracts, injects and creates the ISO file required for the Magisk Module GMT/OP3T. Then, builds and packages Magisk ModuleGMT/OP3T for install as a Magisk Module.
+This program downloads, extracts, injects and creates the ISO file required for the Magisk Module GMT/OP3T. Then, builds and packages Magisk Module GMT/OP3T for install as a Magisk Module.
 Currently only supports Windows platforms.
 
 ## Pre-requisites
 * OnePlus 3T phone.
-* Makisk Manager installed on phone.
+* Magisk Manager installed on phone.
 * USB Drivers installed on the computer.
 * ADB Debugging enabled on phone.
 * Computer authorized to make use of USB ADB Debugging.
