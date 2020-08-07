@@ -2,7 +2,7 @@
 SETLOCAL enableextensions disabledelayedexpansion
 REM ## SET VERSION TO DOWNLOAD IN CASE AUTO DETECTION FAILURE
 REM scrcpy
-SET SCver=1.14
+SET SCver=1.5.1
 REM gnirehtet
 SET RTver=2.4
 REM Original ISO name (without .iso extension)
